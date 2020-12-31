@@ -1,0 +1,11 @@
+Develop a configurable application which can be used to mock different web services. The application must accept an HTTP request
+and return a configurable response.
+
+The solution must be implemented in Java. Please do not use any third-party libraries for web-services; rely only
+on javax.servlet.* for creating an HTTP listener.
+
+Include sample configuration for two services:
+
+- Weather service: returns weather information by city code passed as a parameter in the query string
+
+- Geo-location service: returns time zone by ZIP code given in the POST
