@@ -13,29 +13,43 @@ public class WeatherServlet extends HttpServlet
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException
 	{
 		String cityCode = req.getParameter("city_code");
-		int cityCodeAsNumber = Integer.parseInt(cityCode);
-		String weatherInfo;
+		Integer cityCodeAsNumber = NumberParserUtil.parseNumberFromString(cityCode);
+		String result;
 
-		switch (cityCodeAsNumber)
+		if (cityCodeAsNumber != null)
 		{
-			case 64:
-				weatherInfo = "rainy";
-				break;
-			case 375:
-				weatherInfo = "sunny";
-				break;
-			default:
-				weatherInfo = "-unknown country code-";
-				break;
+			result = getTimezone(cityCodeAsNumber);
+		}
+		else
+		{
+			result = "-city code is not number-";
 		}
 
 		resp.setContentType("text/html");
 		PrintWriter printWriter = resp.getWriter();
 		printWriter.print("<html>");
 		printWriter.print("<body>");
-		printWriter.print("<h1>" + weatherInfo + "</h1>");
+		printWriter.print("<h1>" + result + "</h1>");
 		printWriter.print("</body>");
 		printWriter.print("</html>");
 		printWriter.close();
+	}
+
+	private String getTimezone(Integer cityCodeAsNumber)
+	{
+		String result;
+		switch (cityCodeAsNumber)
+		{
+			case 64:
+				result = "rainy";
+				break;
+			case 375:
+				result = "sunny";
+				break;
+			default:
+				result = "-unknown country code-";
+				break;
+		}
+		return result;
 	}
 }
