@@ -33,7 +33,6 @@ public class GeoLocationServlet extends HttpServlet
 
 		req.setAttribute("timezone", timezone);
 		req.setAttribute(ZIP_CODE_VALUE, zipCode);
-		//add handling exceptions
 		req.getRequestDispatcher("/geo-location.jsp").forward(req, resp);
 	}
 
